@@ -1,35 +1,32 @@
-# import requests
-# import spotipy
-# import json
-# import spotipy.util as util
-
-
-# # token=util.prompt_for_user_token(username, scope, client_id="f26fb6698a614b0ea201805fd941995b", client_secret="a7733ad18b9249a986117b97b9b6cafd", redirect_uri="spotify:track:6rqhFgbbKwnb9MLmUQDhG6")
-# # spotify=spotipy.Spotify()
-# # results=spotify.category_playlists(category_id="top", country="US", limit=20, offset=0)
-# # json=results.json()
-# # print(json)
-
-# #making request to https://api.spotify.com
-# #pulling 100 tracks with popularity ratings from spotify
-
-# r=requests.get("https://api.spotify.com/v1/playlists/playlist_id=37i9dQZEVXbLRQDuF5jeBp/tracks")
-# print(r.text)
-
-# #ask about credentials
-
 import requests
 import json
 from newsapi import NewsApiClient
-#my api key for News API
+from collections import defaultdict
 newsapi = NewsApiClient(api_key='131d9c5b07674440ab948ba13c011d68')
-#Get all the articles that mention song titles in Peri List from Billboard Charts"
-all_articles = newsapi.get_everything(q='song_title',
-                                      #sources='bbc-news,the-verge',
-                                      #domains='bbc.co.uk,techcrunch.com',
-                                      from_param='2019-03-01',
-                                      to='2017-03-31',
+#Get all the articles that mention song titles in Peri's List from Billboard Charts and make this into a for loop"
+def get_CNN_data(d):
+    key_words=["music", "song", "top", "chart", "Billboard", "lyrics", "artist", "popular", '']
+    new_d=defaultdict(list)
+    for song in d:
+        all_articles = newsapi.get_everything(q=song,
+                                      sources='cnn',
+                                    #   from_param='2017-12-01',
+                                    #   to='2017-12-12',
                                       language='en',
-                                      #sort_by='relevancy',
-                                      #page=2)
+                                      sort_by='relevancy')
+        # print(all_articles)
+        for article in all_articles["articles"]:
+            description=article["description"]
+            #print(type(description))
+            for word in description.split():
+                if word in key_words:
+                    #print(song)
+                    id_=article["source"]["id"]
+                    author=article["author"]
+                    title=article["title"]
+                    info=(id_, author, title, description)
+                    new_d[song].append(info)
+    return new_d
 
+di={"Old Town Road", "Body", "breathin'", "Hello"}
+print(get_CNN_data(di))
