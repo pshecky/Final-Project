@@ -36,11 +36,11 @@ def getSoupObjFromURL(url):
 
 soup = getSoupObjFromURL(url)
 
-# Create  a dictionary of the top 200 charts
+# Create  a dictionary of the top 200 songs
 # Make the key the song title
 # and the values the artists, position on chart, and amount of times streamed
 
-spotify = {} ## NEED TO LIMIT TO ONLY TOP 100
+spotify = {}
 lst_of_everything = soup.find('table', class_ = 'chart-table') # Need to check these are the proper titles
 lst_of_songs = lst_of_everything.find_all('tr')
 for song in lst_of_songs[1:]:
