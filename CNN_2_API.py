@@ -3,6 +3,7 @@ import json
 from newsapi import NewsApiClient
 from collections import defaultdict
 import sqlite3
+
 newsapi = NewsApiClient(api_key='131d9c5b07674440ab948ba13c011d68')
 def get_CNN_data(d):
   key_words=["music", "song", "top", "chart", "Billboard", "lyrics", "artist", "popular", "songs", "listeners", "pop", "rap", "country", "jazz", "hip-hop", "beat", "EDM", "dance", "radio", "play", "acoustic", "concert", "live"]
@@ -52,9 +53,9 @@ def populate_database():
     conn=sqlite3.connect('CNN.sqlite')
     cur=conn.cursor()
     for song in n.keys():
-      insertion=(str(song), str(n[song][0]), str(n[song][1]), str(n[song][2]), str(n[song][3]))
+      insertion=(str(n[song][0]), str(song), str(n[song][2]), str(n[song][1]), str(n[song][3]))
       #try printing out these insertions individually to make sure it is the right stuff FIRST
-      statement='''INSERT OR IGNORE INTO "CNN Articles" VALUES (?, ?, ?, ?)'''
+      statement='''INSERT OR IGNORE INTO "CNN Articles" VALUES (?, ?, ?, ?, ?)'''
       cur.execute(statement, insertion)
     conn.commit()
 populate_database()
