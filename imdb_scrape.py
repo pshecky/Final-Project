@@ -28,9 +28,9 @@ def getSoupObjFromURL(url):
     return soup
 
 soup = getSoupObjFromURL(url)
-#create a dictionary of the top 100 tours of all time
-#make the key the tour
-#and values the artist and the ranking
+#create a dictionary of the top 100 artists from imdb
+#make the key the artist
+#and values the song title and the ranking
 
 def scrape(soup):
     imdb={}
