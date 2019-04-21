@@ -22,6 +22,16 @@ def get_CNN_data(d):
             new_d[song].append(info)
   return new_d
 
+  
+#how do I write dictionary to json file?
+
+# with open('cnn_cache.json', 'w') as fp:
+#     json.dump(new_d, fp)
+
+# f = open('cnn_cache.json','w')
+# f.write(json.dumps(get_CNN_data(d)))
+# f.close()
+
 def make_database():
   try:
     conn=sqlite3.connect('CNN.sqlite')
@@ -55,6 +65,7 @@ def populate_database():
     for song in n.keys():
       insertion=(str(n[song][0]), str(song), str(n[song][2]), str(n[song][1]), str(n[song][3]))
       #try printing out these insertions individually to make sure it is the right stuff FIRST
+      #problem was definitley with the insertion statements before
       statement='''INSERT OR IGNORE INTO "CNN Articles" VALUES (?, ?, ?, ?, ?)'''
       cur.execute(statement, insertion)
     conn.commit()
