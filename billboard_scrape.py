@@ -102,7 +102,7 @@ ari_lst = []
 
 
 
-conn=sqlite3.connect('CNN.sqlite')
+conn=sqlite3.connect('music.sqlite')
 cur=conn.cursor()
 
 for song in cur.execute("SELECT song FROM Billboard WHERE artist = 'Ariana Grande'"):
