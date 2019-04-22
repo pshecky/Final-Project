@@ -81,7 +81,7 @@ def make_database():
 make_database()
 
 def populate_database():
-        conn=sqlite3.connect('CNN.sqlite')
+        conn=sqlite3.connect('music.sqlite')
         cur=conn.cursor()
 
         for song in scrape(soup).keys():
