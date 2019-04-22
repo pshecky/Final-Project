@@ -113,10 +113,10 @@ labels = ['Ariana Grande','Post Malone','Billie Eilish','Other Artists']
 values = [ArianaGrandeStreams,PostMaloneStreams,BillieEilishStreams,OtherArtistsStreams]
 colors = ['#FEBFB3', '#E1396C', '#96D38C', '#D0F9B1']
 
-trace = go.Pie(labels=labels, values=values,  title="Streams Per Our Favorite Artists in Spotify's Top 200",
-               hoverinfo='label+percent', textinfo='value', 
-               textfont=dict(size=20),
+trace = go.Pie(labels=labels, values=values, title="Streams Per Our Favorite Artists in Spotify's Top 200",
+               hoverinfo='label', textinfo='value+percent', 
+               textfont=dict(size=15),
                marker=dict(colors=colors, 
-                           line=dict(color='#000000', width=2)))
+                           line=dict(color='#000000', width=1.5)))
 
 py.iplot([trace], filename='styled_pie_chart', auto_open=True)
