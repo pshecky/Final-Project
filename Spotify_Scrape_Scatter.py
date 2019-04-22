@@ -101,7 +101,7 @@ layout =  go.Layout(
     title=go.layout.Title(
         text="How Many Times Has Each Top 200 Song on Spotify Been Played?",
         font=dict(
-                family='Courier New, monospace',
+                family='Arial',
                 size=18,
                 color='#000000'
             ),
@@ -112,7 +112,7 @@ layout =  go.Layout(
         title=go.layout.xaxis.Title(
             text='Position on Spotify Top 200',
             font=dict(
-                family='Courier New, monospace',
+                family='Arial',
                 size=18,
                 color='#000000'
             )
@@ -122,7 +122,7 @@ layout =  go.Layout(
         title=go.layout.yaxis.Title(
             text='# of Streams',
             font=dict(
-                family='Courier New, monospace',
+                family='Arial',
                 size=18,
                 color='#000000'
             )
