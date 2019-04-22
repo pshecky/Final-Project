@@ -69,7 +69,7 @@ f = open('spotify_cache_pie.json', 'w')
 f.write(json.dumps(spotify))
 f.close()
 
-conn = sqlite3.connect('spotify_charts_pie.sqlite')
+conn = sqlite3.connect('music.sqlite')
 cur = conn.cursor()
 
 cur.execute('CREATE TABLE IF NOT EXISTS Spotify (song TEXT, artist TEXT, position INTEGER, streams INTEGER)')
