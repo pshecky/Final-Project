@@ -64,7 +64,7 @@ f.close()
 
 def make_database():
         try:
-                conn=sqlite3.connect('CNN.sqlite')
+                conn=sqlite3.connect('music.sqlite')
                 cur=conn.cursor()
         except:
                 print('Could not connect')
