@@ -20,29 +20,24 @@ def getSoupObjFromURL(url):
     ctx = ssl.create_default_context()
     ctx.check_hostname = False
     ctx.verify_mode = ssl.CERT_NONE
-
-    req = Request(url, headers={'User-Agent': 'Mozilla/5.0'}) # Line added
-
+    req = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
     html = urlopen(req, context=ctx).read() # Line modified
     soup = BeautifulSoup(html, "html.parser")
     return soup
-
 soup = getSoupObjFromURL(url)
-#create a dictionary of the top 100 artists from imdb
-#make the key the artist
-#and values the song title and the ranking
 
+#create a dictionary of the top 100 artists from imdb top 100 chart
+#make the key the title of the song
+#and values the artist name and the ranking in a list
 def scrape(soup):
     imdb={}
     table_container=soup.find('div',class_='lister list detail sub-list')
     table=table_container.find('div', class_='lister-list')
     songs=table.find_all('div', class_='lister-item mode-detail')
-
     for song in songs:
         #find artist of song
         content=song.find('div', class_='lister-item-content')
         song_info=content.find("h3", class_="lister-item-header")
-        #print(song_info.text)
         artist=song_info.a.text
         a=artist.strip()
 
@@ -51,19 +46,18 @@ def scrape(soup):
         title=title_info.find('p')
         t= title.text.strip()
 
-        #find ranking
+        #find ranking of the song
         rank_info=song.find('span', class_="lister-item-index unbold text-primary")
         r=rank_info.text
         x=r.strip('. ')
         ranking=int(x)
         
-
-        #make dictionary where title is the key and the artist and the ranking is the key
+        #make dictionary where title is the key and the artist and the ranking is the value
         imdb[t]=[a, ranking]
-
     return imdb
 scrape(soup)
 
+#set up the cache to write to json file
 f = open('imdb_cache.json','w')
 f.write(json.dumps(scrape(soup)))
 f.close()
@@ -83,7 +77,6 @@ def make_database():
         cur.execute(statement)
         conn.commit()
         conn.close()
-
 make_database()
 
 def populate_database():
@@ -97,7 +90,6 @@ def populate_database():
                 cur.execute('''INSERT INTO 'Imdb' (song, artist, ranking)
                  VALUES (?,?,?)''', (t,artist,ranking))
         conn.commit()
-
 populate_database()
 
 conn=sqlite3.connect('music.sqlite')
