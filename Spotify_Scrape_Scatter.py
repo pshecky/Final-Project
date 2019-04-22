@@ -12,13 +12,13 @@ import plotly.plotly as py
 import plotly.graph_objs as go
 import numpy as np
 import os
-import Plotly_Key
+#import Plotly_Key
 
 from IPython.display import IFrame
 IFrame(src= "https://dash-simple-apps.plotly.host/dash-figurelabelsplot/", width="100%", height="650px", frameBorder="0")
 
-plotly.__version__
-plotly.tools.set_credentials_file(username='landauha', api_key=Plotly_Key.api_key)
+#plotly.__version__
+#plotly.tools.set_credentials_file(username='landauha', api_key=Plotly_Key.api_key)
 
 # Get base url and initialize Beautifup Soup
 url = 'https://spotifycharts.com/regional'
